@@ -1,5 +1,6 @@
 import {
   isRouteErrorResponse,
+  Link,
   Links,
   Meta,
   Outlet,
@@ -29,6 +30,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Posts app</title>
         <Meta />
         <Links />
       </head>
@@ -42,7 +44,47 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <>
+      <header className="bg-white shadow-md">
+        <nav
+          className="container mx-auto px-4 py-4 flex justify-between items-center"
+          aria-label="Main navigation"
+        >
+          <h1 className="text-xl font-bold text-gray-800">Posts App</h1>
+          <ul className="flex space-x-6">
+            <li>
+              <Link
+                to="/"
+                className="text-gray-700 hover:text-blue-600 transition"
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/about"
+                className="text-gray-700 hover:text-blue-600 transition"
+              >
+                About
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/posts"
+                className="text-gray-700 hover:text-blue-600 transition"
+              >
+                Posts
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <div className="container mx-auto px-4 py-4">
+        <Outlet />
+      </div>
+    </>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
